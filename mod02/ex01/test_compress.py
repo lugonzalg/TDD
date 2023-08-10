@@ -8,6 +8,22 @@ INPUT = ["aabcccccaaa", "abcde", "aabbccddeeefffffff", "a", "aa", "aaaabbbbccccc
 
 RESULT = ["a2b1c5a3", "abcde", "a2b2c2d2e3f7", "a", "aa", "a4b4c8", "z3x1y1z5", "a1000", ""]
 
+def compressor_3(in_str) -> str:
+
+    holder = in_str[0]
+    counter = 0
+    out_str = ""
+    for char in in_str:
+        if char != holder:
+
+            out_str += holder + str(counter)
+            holder = char
+            counter = 0
+        counter += 1
+    
+    out_str += holder + str(counter)
+    return out_str
+
 def compressor_1(in_str) -> str:
 
     if in_str == None or type(in_str) != str:
@@ -74,10 +90,14 @@ def test_compressor():
 import timeit
 
 def time_complexity_1():
-    compressor_1("aaaa"*1000)
+    compressor_1("a"*1000)
 
 def time_complexity_2():
-    compressor_2("aaaa"*1000)
+    compressor_2("a"*1000)
+
+def time_complexity_3():
+    compressor_3("a"*1000)
 
 print(timeit.timeit(time_complexity_1, number=10000))
 print(timeit.timeit(time_complexity_2, number=10000))
+print(timeit.timeit(time_complexity_3, number=10000))
